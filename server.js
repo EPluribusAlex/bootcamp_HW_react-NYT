@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const bookRoutes = require("./routes");
+const routes = require("./routes");
 const path = require("path");
 
 const PORT = process.env.PORT || 3001;
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add API Routes
-app.use("/api/book", bookRoutes);
+app.use("/api", routes);
 
 // Send every request to the React app
 // Define any API routes before this runs
