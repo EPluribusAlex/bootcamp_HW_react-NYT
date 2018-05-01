@@ -1,11 +1,13 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const routes = require("./routes");
-const path = require("path");
+const 
+	express = require("express"),
+	bodyParser = require("body-parser"),
+	mongoose = require("mongoose"),
+	routes = require("./routes"),
+	path = require("path");
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+const 
+	PORT = process.env.PORT || 3001,
+	app = express();
 
 // Configure to use body parser for AJAX requests
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,7 +19,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add API Routes
-app.use("/api", routes);
+app.use("/api", routes.api);
+app.use("/scrape", routes.scrape);
 
 // Send every request to the React app
 // Define any API routes before this runs
@@ -26,7 +29,7 @@ app.get("*", function(req, res) {
 });
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreview");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytReact");
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
