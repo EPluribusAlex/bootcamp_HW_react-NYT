@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/EPluribusAlex/bootcamp_HW_react-NYT#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
     "mongoose": "^5.0.17"
   },
