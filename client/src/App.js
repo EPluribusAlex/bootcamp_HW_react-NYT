@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import {Container, Row, Col} from "reactstrap";
 import logo from './logo.svg';
 import './App.css';
+import Home from "./components/Home";
+import Saved from "./components/Saved";
 
 class App extends Component {
   render() {

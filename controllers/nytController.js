@@ -4,54 +4,58 @@ const
 	db = require("../models");
 
 module.exports = {
-	findAll: function(req, res) {
+	findAllSaved: function(req, res) {
 		db.Article
-			.find(req.query)
+			.find({})
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(400).json(err));
 	},
-	findById: function(req, res) {
+	editComment: function(req, res) {
 		db.Article
-			.findById(req.params.id)
+			.findByIdAndUpdate(req.params.id, {comment: req.body})
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(400).json(err));
 	},
-	comment: function(req, res) {
+	unsave: function(req, res) {
 		db.Article
-			.findOneAndUpdate({_id: req.params.id}, req.body)
+			.remove({_id: req.params.id})
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(400).json(err));
 	},
-	scrape: function(req, res) {
-
+	search: function(req, res) {
 		axios
-			.get("https://www.nytimes.com/?action=click&pgtype=Homepage&module=MastheadLogo&region=TopBar")
-			.then((page) => {
-
+			.get(`https://www.nytimes.com/search/${req.query.term}/best/${req.query.startDate}/${req.query.endDate}`)
+			.then(page => {
 				const $ = cheerio.load(page.data);
-
-				$("article").each((i, element) => {
-
+				$("li.SearchResults-item--3k02W").each((i, element) => {
 					const result = {
-
+						title: $(element).find("h4.Item-headline--3WqlT").text(),
+						link: $(element).find().text(),
+						summary: $(element).find("p..Item-summary--3nKWX").text()
 					};
-
-					if() {
-						db.Article
-							.create(result)
-							.then((dbNewsArt) => console.log(dbNewsArt))
-							.catch((err) => console.log(err));
-					}
-
 				});
-
-				res.send("Articles scraped");
-
+				res.send("Results scraped");
 			})
-			.catch((err) => {
-				res.json(err);
-				console.log(err);
-			});
-
+			.catch(err => res.json(err));
+	},
+	save: function(req, res) {
+		axios
+			.get(req.link)
+			.then(page => {
+				const $ = cheerio.load(page.data);
+				const result = {
+					title: $().find("h1.css-1i2h6mf").text(),
+					author: $().find("a.css-1gkapse e1x1pwtg0").text(),
+					date: $().find("time.css-bfo5aw").text(),
+					link: $(html).attr("itemid"),
+					comment: req.body
+				};
+				db.Article
+					.create(result)
+					.then(dbModel => console.log(dbModel))
+					.catch(err => console.log(err));
+				res.send("Article saved");
+			})
+			.catch(err => res.json(err));
 	}
 }
