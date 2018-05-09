@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === "production") {
 
 // Add API Routes
 app.use("/api", routes.api);
-app.use("/scrape", routes.scrape);
 
 // Send every request to the React app
 // Define any API routes before this runs

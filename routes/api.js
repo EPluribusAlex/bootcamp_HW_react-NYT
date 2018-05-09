@@ -4,7 +4,7 @@ const nytCtrl = require("../controllers/nytController");
 router.route("/")
 	.get(nytCtrl.findAllSaved);
 
-router.route("article/:id")
+router.route("/article/:id")
 	.put(nytCtrl.editComment)
 	.delete(nytCtrl.unsave);
 
