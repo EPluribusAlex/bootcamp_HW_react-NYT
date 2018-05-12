@@ -8,8 +8,10 @@ router.route("/article/:id")
 	.put(nytCtrl.editComment)
 	.delete(nytCtrl.unsave);
 
-router.route("/scrape")
-	.get(nytCtrl.search)
-	.post(nytCtrl.save);
+router.route("/scrape/search")
+	.post(nytCtrl.search);
+
+router.route("/scrape/:link")
+	.get(nytCtrl.save);
 
 module.exports = router;

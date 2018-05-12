@@ -24,17 +24,19 @@ module.exports = {
 	},
 	search: function(req, res) {
 		axios
-			.get(`https://www.nytimes.com/search/${req.query.term}/best/${req.query.startDate}/${req.query.endDate}`)
+			.get(`https://www.nytimes.com/search/${req.body.search}/best/${req.body.startDate}/${req.body.endDate}`)
 			.then(page => {
+				const results = [];
 				const $ = cheerio.load(page.data);
 				$("li.SearchResults-item--3k02W").each((i, element) => {
 					const result = {
 						title: $(element).find("h4.Item-headline--3WqlT").text(),
 						link: $(element).find().text(),
-						summary: $(element).find("p..Item-summary--3nKWX").text()
+						summary: $(element).find("p.Item-summary--3nKWX").text()
 					};
+					results.push(result);
 				});
-				res.send("Results scraped");
+				res.json(results);
 			})
 			.catch(err => res.json(err));
 	},
@@ -58,4 +60,4 @@ module.exports = {
 			})
 			.catch(err => res.json(err));
 	}
-}
+};

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import "../App.css";
 import Search from "./Search";
-import Results from "./Results";
 import Saved from "./Saved";
 import Jumbo from "./Jumbo";
 
@@ -17,12 +16,7 @@ class Home extends Component {
 					<Row>
 						<Saved />
 					</Row>
-					<Row>
-						<Search />
-					</Row>
-					<Row>
-						<Results />
-					</Row>
+					<Search />
 				</Container>	
 			</div>
 		)
