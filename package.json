@@ -7,11 +7,9 @@
   "scripts": {
     "server": "node server.js",
     "client": "node scripts/start-client.js",
-    "start": "concurrently \"npm run server.js\" \"npm run client\"",
-    "dev": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
     "build": "node scripts/build.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "yarn build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git+https://github.com/EPluribusAlex/bootcamp_HW_react-NYT.git",
   "keywords": [],
