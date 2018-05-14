@@ -24,6 +24,7 @@
     "body-parser": "^1.18.2",
     "bootstrap": "^4.1.1",
     "cheerio": "^1.0.0-rc.2",
+    "concurrently": "^3.5.1",
     "express": "^4.16.3",
     "mongoose": "^5.0.17",
     "react": "^16.3.2",
@@ -33,7 +34,6 @@
     "reactstrap": "^6.0.1"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1",
     "nodemon": "^1.17.3"
   }
 }
