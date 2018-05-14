@@ -12,10 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "yarn build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EPluribusAlex/bootcamp_HW_react-NYT.git"
-  },
+  "repository": "git+https://github.com/EPluribusAlex/bootcamp_HW_react-NYT.git",
   "keywords": [],
   "license": "MIT",
   "bugs": {
