@@ -18,7 +18,8 @@ class Home extends Component {
 			searchTerms: "",
 			startDate: "",
 			endDate: "",
-			articles: []
+			articles: [],
+      dbArticles: []
 		};
 	}
 
@@ -48,7 +49,7 @@ class Home extends Component {
 
 		const resultsTable = this.state.articles.length != 0 ? 
 			(
-				<Results articles={this.state.articles} />
+				<Results articles={this.state.articles} onDBChange={this.onChildChange} />
 			) : ( 
 				null
 			);
@@ -59,7 +60,7 @@ class Home extends Component {
 				<Container>
 					<Row>
 						<Col>
-							<Saved />
+							<Saved dbArticles={this.state.dbArticles} onDBChange={this.onChildChange} />
 						</Col>
 					</Row>
 					<Row>

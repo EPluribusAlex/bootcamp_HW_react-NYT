@@ -3,14 +3,6 @@ const
 	cheerio = require("cheerio"),
 	db = require("../models");
 
-function store(item) {
-	db.Article
-		.create(item)
-		.then(dbModel => console.log(dbModel))
-		.catch(err => console.log(err));
-	res.send("Article saved");
-}
-
 module.exports = {
 	findAllSaved: function(req, res) {
 		db.Article
@@ -20,11 +12,12 @@ module.exports = {
 	},
 	editComment: function(req, res) {
 		db.Article
-			.findByIdAndUpdate(req.params.id, {comment: req.body})
+			.findByIdAndUpdate(req.params.id, {comment: req.body.comment})
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(400).json(err));
 	},
 	unsave: function(req, res) {
+		console.log(req.params.id);
 		db.Article
 			.remove({_id: req.params.id})
 			.then(dbModel => res.json(dbModel))
@@ -51,21 +44,27 @@ module.exports = {
 		console.log(queryURL, "URL");
 	},
 	save: function(req, res) {
-		console.log(req.body.link, "article link");
-		axios
-			.get(req.body.link)
-			.then(page => {
-				const $ = cheerio.load(page.data);
-				const result = {
-						title: $("body").find(".css-1i2h6mf").text(),
-						author: $("body").find(".css-1gkapse e1x1pwtg0").text(),
-						date: $("body").find(".css-bfo5aw").text(),
-						link: $("html").attr("itemid"),
-						comment: ""//req.body.comment
-				};
-				console.log(result);
-				store(result);
-			})
-			.catch(err => res.json(err));
+		// console.log(req.body.link, "article link");
+		// axios
+		// 	.get(req.body.link)
+		// 	.then(page => {
+		// 		const $ = cheerio.load(page.data);
+		// 		const result = {
+		// 				title: $("body").find(".css-1i2h6mf").text(),
+		// 				author: $("body").find(".css-1gkapse e1x1pwtg0").text(),
+		// 				date: $("body").find(".css-bfo5aw").text(),
+		// 				link: $("html").attr("itemid"),
+		// 				comment: ""//req.body.comment
+		// 		};
+		// 		console.log(result);
+		// 		store(result);
+		// 	})
+		// 	.catch(err => res.json(err));
+		console.log(req.body);
+		db.Article
+			.create(req.body)
+			.then(dbModel => console.log(dbModel))
+			.catch(err => console.log(err));
+		res.send("Article saved");
 	}
 };

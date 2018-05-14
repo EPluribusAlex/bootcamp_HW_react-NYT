@@ -11,7 +11,7 @@ router.route("/article/:id")
 router.route("/scrape/search")
 	.post(nytCtrl.search);
 
-router.route("/scrape/article")
+router.route("/save")
 	.post(nytCtrl.save);
 
 module.exports = router;
