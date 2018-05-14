@@ -5,7 +5,7 @@ const Jumbo = (props) => {
   return (
     <div>
       <Jumbotron>
-        <h1 className="display-6">NYTimes Article Scraper and Saver</h1>
+        <h1 className="display-6 text-center">NY Times Article Scraper</h1>
       </Jumbotron>
     </div>
   );
